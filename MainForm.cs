@@ -1,6 +1,8 @@
 
-namespace SelectRaw {
-    public partial class MainForm : Form {
+namespace SelectRaw
+{
+    public partial class MainForm : Form
+    {
         public MainForm() {
             InitializeComponent();
         }

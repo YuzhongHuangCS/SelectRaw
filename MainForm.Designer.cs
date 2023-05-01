@@ -25,6 +25,7 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             JPGTargetButton = new Button();
             RawSourceButton = new Button();
             RawTargetButton = new Button();
@@ -170,6 +171,7 @@
             Controls.Add(RawSourceButton);
             Controls.Add(JPGTargetButton);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "MainForm";
             Text = "SelectRaw";
