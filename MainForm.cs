@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 
 namespace SelectRaw {
     public partial class MainForm : Form {
@@ -27,7 +26,7 @@ namespace SelectRaw {
             }
         }
 
-        private void StartButton_Click(object sender, EventArgs e) {
+        private async void StartButton_Click(object sender, EventArgs e) {
             StartButton.Enabled = false;
             var files = Directory.GetFiles(JPGTargetBox.Text);
             DialogResult dialogResult = DialogResult.None;
@@ -38,7 +37,9 @@ namespace SelectRaw {
                 var src = Path.Join(RawSourceBox.Text, raw_f);
                 var dst = Path.Join(RawTargetBox.Text, raw_f);
                 try {
-                    File.Copy(src, dst);
+                    await Task.Run(() => {
+                        File.Copy(src, dst);
+                    });
                 } catch (FileNotFoundException) {
                     dialogResult = MessageBox.Show($"{src} not found\nOk to Skip\nCancel to Stop", $"{src} not found", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (dialogResult == DialogResult.Cancel) {
@@ -47,7 +48,9 @@ namespace SelectRaw {
                 } catch (IOException) {
                     dialogResult = MessageBox.Show($"{dst} already exists\nYes to Overwrite\nNo to Skip\nCancel to Stop", $"{dst} already exists", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                     if (dialogResult == DialogResult.Yes) {
-                        File.Copy(src, dst, true);
+                        await Task.Run(() => {
+                            File.Copy(src, dst, true);
+                        });
                     } else {
                         if (dialogResult == DialogResult.Cancel) {
                             break;
