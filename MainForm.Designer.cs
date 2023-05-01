@@ -25,10 +25,10 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            SelectButton = new Button();
+            JPGTargetButton = new Button();
             RawSourceButton = new Button();
             RawTargetButton = new Button();
-            SelectBox = new TextBox();
+            JPGTargetBox = new TextBox();
             RawSourceBox = new TextBox();
             RawTargetBox = new TextBox();
             JPGLabel = new Label();
@@ -39,14 +39,15 @@
             CopyProgressBar = new ProgressBar();
             SuspendLayout();
             // 
-            // SelectButton
+            // JPGTargetButton
             // 
-            SelectButton.Location = new Point(12, 12);
-            SelectButton.Name = "SelectButton";
-            SelectButton.Size = new Size(160, 40);
-            SelectButton.TabIndex = 0;
-            SelectButton.Text = "Select Folder";
-            SelectButton.UseVisualStyleBackColor = true;
+            JPGTargetButton.Location = new Point(12, 12);
+            JPGTargetButton.Name = "JPGTargetButton";
+            JPGTargetButton.Size = new Size(160, 40);
+            JPGTargetButton.TabIndex = 0;
+            JPGTargetButton.Text = "JPG Target";
+            JPGTargetButton.UseVisualStyleBackColor = true;
+            JPGTargetButton.Click += JPGTargetButton_Click;
             // 
             // RawSourceButton
             // 
@@ -56,6 +57,7 @@
             RawSourceButton.TabIndex = 2;
             RawSourceButton.Text = "Raw Source Folder";
             RawSourceButton.UseVisualStyleBackColor = true;
+            RawSourceButton.Click += RawSourceButton_Click;
             // 
             // RawTargetButton
             // 
@@ -65,16 +67,19 @@
             RawTargetButton.TabIndex = 4;
             RawTargetButton.Text = "Raw Target Folder";
             RawTargetButton.UseVisualStyleBackColor = true;
+            RawTargetButton.Click += RawTargetButton_Click;
             // 
-            // SelectBox
+            // JPGTargetBox
             // 
-            SelectBox.Location = new Point(178, 15);
-            SelectBox.Name = "SelectBox";
-            SelectBox.Size = new Size(394, 34);
-            SelectBox.TabIndex = 1;
+            JPGTargetBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            JPGTargetBox.Location = new Point(178, 15);
+            JPGTargetBox.Name = "JPGTargetBox";
+            JPGTargetBox.Size = new Size(394, 34);
+            JPGTargetBox.TabIndex = 1;
             // 
             // RawSourceBox
             // 
+            RawSourceBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             RawSourceBox.Location = new Point(178, 61);
             RawSourceBox.Name = "RawSourceBox";
             RawSourceBox.Size = new Size(394, 34);
@@ -82,6 +87,7 @@
             // 
             // RawTargetBox
             // 
+            RawTargetBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             RawTargetBox.Location = new Point(178, 107);
             RawTargetBox.Name = "RawTargetBox";
             RawTargetBox.Size = new Size(394, 34);
@@ -98,11 +104,13 @@
             // 
             // JPGBox
             // 
+            JPGBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             JPGBox.Location = new Point(178, 153);
             JPGBox.Name = "JPGBox";
             JPGBox.Size = new Size(394, 34);
             JPGBox.TabIndex = 7;
             JPGBox.Text = ".JPG";
+            JPGBox.LostFocus += TextBox_CheckExt;
             // 
             // RawLabel
             // 
@@ -115,14 +123,17 @@
             // 
             // RawBox
             // 
+            RawBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             RawBox.Location = new Point(178, 199);
             RawBox.Name = "RawBox";
             RawBox.Size = new Size(394, 34);
             RawBox.TabIndex = 9;
             RawBox.Text = ".ARW";
+            RawBox.LostFocus += TextBox_CheckExt;
             // 
             // StartButton
             // 
+            StartButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             StartButton.Location = new Point(12, 245);
             StartButton.Name = "StartButton";
             StartButton.Size = new Size(560, 40);
@@ -133,11 +144,13 @@
             // 
             // CopyProgressBar
             // 
+            CopyProgressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CopyProgressBar.Location = new Point(12, 300);
             CopyProgressBar.Name = "CopyProgressBar";
             CopyProgressBar.Size = new Size(558, 35);
+            CopyProgressBar.Step = 1;
+            CopyProgressBar.Style = ProgressBarStyle.Continuous;
             CopyProgressBar.TabIndex = 11;
-            CopyProgressBar.Value = 50;
             // 
             // MainForm
             // 
@@ -152,10 +165,10 @@
             Controls.Add(JPGLabel);
             Controls.Add(RawTargetBox);
             Controls.Add(RawSourceBox);
-            Controls.Add(SelectBox);
+            Controls.Add(JPGTargetBox);
             Controls.Add(RawTargetButton);
             Controls.Add(RawSourceButton);
-            Controls.Add(SelectButton);
+            Controls.Add(JPGTargetButton);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Margin = new Padding(4);
             Name = "MainForm";
@@ -166,10 +179,10 @@
 
         #endregion
 
-        private Button SelectButton;
+        private Button JPGTargetButton;
         private Button RawSourceButton;
         private Button RawTargetButton;
-        private TextBox SelectBox;
+        private TextBox JPGTargetBox;
         private TextBox RawSourceBox;
         private TextBox RawTargetBox;
         private Label JPGLabel;
