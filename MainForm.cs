@@ -32,6 +32,7 @@ namespace SelectRaw
             StartButton.Enabled = false;
             var files = Directory.GetFiles(JPGTargetBox.Text);
             DialogResult dialogResult = DialogResult.None;
+            CopyProgressBar.Maximum = files.Length;
 
             for (int i = 0; i < files.Length; i++) {
                 var f = files[i];
@@ -59,7 +60,8 @@ namespace SelectRaw
                         } // nothing to do for DialogResult.No
                     }
                 }
-                CopyProgressBar.Value = (int)(100.0 * (i + 1) / files.Length);
+
+                CopyProgressBar.PerformStep();
             }
             if (dialogResult == DialogResult.Cancel) {
                 MessageBox.Show("Task Aborted!");
